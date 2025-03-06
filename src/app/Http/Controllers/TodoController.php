@@ -21,11 +21,13 @@ class TodoController extends Controller
     public function store(Request $request)
     // メソッドインジェクション
     {
-        $content = $request->input('content');
-        // dd($content);
+        $inputs = $request->all();
+        dd($inputs);
+        
         $todo = new Todo();
         // Todoクラスのインスタンス化
-        $todo->content = $content;
+        $todo->fill($inputs);
+        // $todo->content = $inputs['content'];
         // カラム名のプロパティに保存したい値を代入
         $todo->save();
         // -save関数でINSERT文を実行
